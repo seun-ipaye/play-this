@@ -122,7 +122,15 @@ def guest_join(guest_data: GuestJoin):
         
 @app.get("/rooms/{room_id}/guests")
 def get_guests(room_id: str):
-#check if room exists though
+    room_exists = False
+
+    for room in room_list:
+        if room["id"] == room_id:
+            room_exists = True
+            break
+
+    if not room_exists:
+        raise HTTPException(status_code=404, detail="Room not found")
     this_guest_list = []
     for guest in guest_list:
         if guest["room_id"] == room_id:
@@ -173,5 +181,21 @@ def add_song(song_data: AddSong):
     return song
         
             
-        
+@app.get("/rooms/{room_id}/songs")
+def get_songs(room_id: str):
+    room_exists = False
+
+    for room in room_list:
+        if room["id"] == room_id:
+            room_exists = True
+            break
+
+    if not room_exists:
+        raise HTTPException(status_code=404, detail="Room not found")
+    
+    this_song_list = []
+    for song in song_list:
+        if song["room_id"] == room_id:
+            this_song_list.append(song)
+    return this_song_list
         
