@@ -33,7 +33,17 @@ guest_list = [
     "room_id": "YPW8UI7GXJ"
   }
 ]
-
+song_list = [
+    {
+        "song_id": "7R800MMK",
+        "room_id": "YPW8UI7GXJ",
+        "guest_id": "VWIMCY",
+        "title": "the jesters dance",
+        "artist": "in flames",
+        "votes": 0,
+        "status": "pending"
+    }
+]
 
 
 def generate_random_code(size, chars=string.ascii_uppercase + string.digits):
@@ -45,6 +55,12 @@ class RoomCreate(BaseModel):
 class GuestJoin(BaseModel):
     name: str
     room_code: str
+    
+class AddSong(BaseModel):
+    title: str
+    artist: str
+    room_id: str
+    guest_id: str
 
 @app.get("/")
 def read_root():
@@ -60,7 +76,6 @@ def create_room(room_data: RoomCreate):
         "title": room_data.title,
         "id": room_id,
         "code": code,
-        "guest_list": []
     }
     
     room_list.append(room)
@@ -107,13 +122,55 @@ def guest_join(guest_data: GuestJoin):
         
 @app.get("/rooms/{room_id}/guests")
 def get_guests(room_id: str):
+#check if room exists though
     this_guest_list = []
     for guest in guest_list:
         if guest["room_id"] == room_id:
             this_guest_list.append(guest)
     return this_guest_list
         
+@app.post("/songs")
+def add_song(song_data: AddSong):
+    room_exists = False
+    guest_exists = False
 
+    for room in room_list:
+        if room["id"] == song_data.room_id:
+            room_exists = True
+            break
+
+    if not room_exists:
+        raise HTTPException(status_code=404, detail="Room not found")
+
+    for guest in guest_list:
+        if guest["guest_id"] == song_data.guest_id:
+            guest_exists = True
+
+            if guest["room_id"] != song_data.room_id:
+                raise HTTPException(
+                    status_code=400,
+                    detail="Guest does not belong to this room"
+                )
+            break
+
+    if not guest_exists:
+        raise HTTPException(status_code=404, detail="Guest not found")
+
+    song_id = generate_random_code(8)
+
+    song = {
+        "song_id": song_id,
+        "room_id": song_data.room_id,
+        "guest_id": song_data.guest_id,
+        "title": song_data.title,
+        "artist": song_data.artist,
+        "votes": 0,
+        "status": "pending"
+    }
+
+    song_list.append(song)
+
+    return song
         
             
         
