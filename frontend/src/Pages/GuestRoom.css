@@ -1,0 +1,87 @@
+.guestroom {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.gr-hero {
+  padding: 32px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gr-hero h1 {
+  font-size: 36px;
+  letter-spacing: -1px;
+}
+
+.gr-sub {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.search-box input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  font-size: 16px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.search-box input::placeholder {
+  color: var(--muted);
+}
+
+.song-queue {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 40px;
+}
+
+.queue-header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.vote-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.vote-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.vote-btn.voted {
+  background: rgba(124,92,252,0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}

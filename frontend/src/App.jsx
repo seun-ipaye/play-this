@@ -3,6 +3,7 @@ import Landing from './Pages/Landing'
 import CreateRoom from './Pages/CreateRoom'
 import JoinRoom from './Pages/JoinRoom'
 import Dashboard from './Pages/Dashboard'
+import GuestRoom from './Pages/GuestRoom'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/create" element={<CreateRoom />} />
         <Route path="/join" element={<JoinRoom />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/room/:code" element={<GuestRoom />} />
       </Routes>
     </BrowserRouter>
   )
