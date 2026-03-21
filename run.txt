@@ -1,0 +1,6 @@
+frontend
+npm run dev
+
+backend
+source venv/bin/activate
+uvicorn main:app --reload

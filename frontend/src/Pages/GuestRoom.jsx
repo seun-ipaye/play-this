@@ -76,6 +76,36 @@ function GuestRoom() {
     }
   }
 
+  async function voteSong(songID) {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/songs/vote`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            song_id: songID,
+            guest_id: guestID,
+            room_id: roomID,
+          }),
+        },
+      );
+
+      const data = await response.json();
+
+      console.log("song:", data);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="guestroom">
       <nav className="top-nav">
@@ -88,7 +118,7 @@ function GuestRoom() {
 
       <section className="gr-hero">
         <h1>Hi {guestName}</h1>
-        <p className="gr-sub">{roomTitle}</p>
+        {/* <p className="gr-sub">{roomTitle}</p> */}
       </section>
 
       <section className="gr-hero">
@@ -101,7 +131,7 @@ function GuestRoom() {
       <div className="search-box">
         <input
           type="text"
-          //placeholder="Search for a song or artist..."
+          // placeholder="Search for a song or artist..."
           placeholder="for title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -119,7 +149,7 @@ function GuestRoom() {
       </div>
 
       <button className="vote-btn" onClick={() => addSong()}>
-        CLICK ME TO REQUEST A SONG
+        Request
       </button>
 
       <div className="song-queue">
@@ -133,7 +163,9 @@ function GuestRoom() {
               <div className="song-title">{song.title}</div>
               <div className="song-artist">{song.artist}</div>
             </div>
-            <button className="vote-btn">▲ {song.votes}</button>
+            <button className="vote-btn" onClick={() => voteSong(song.song_id)}>
+              ▲ {song.votes}
+            </button>
           </div>
         ))}
       </div>

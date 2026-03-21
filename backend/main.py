@@ -36,13 +36,14 @@ guest_list = [
 ]
 song_list = [
     {
-        "id": "7R800MMK",
+        "song_id": "7R800MMK",
         "room_id": "YPW8UI7GXJ",
         "guest_id": "0JCSUZ",
         "title": "the jesters dance",
         "artist": "in flames",
         "votes": 20,
-        "status": "pending"
+        "status": "pending",
+        "votes_by": []
     },
     {
         "song_id": "VQMHJE6A",
@@ -51,7 +52,8 @@ song_list = [
         "title": "fuga",
         "artist": "mavo",
         "votes": 12,
-        "status": "pending"
+        "status": "pending",
+        "votes_by": []
     }
 ]
 
@@ -80,7 +82,11 @@ class AddSong(BaseModel):
     guest_id: str
 
 class VoteSong(BaseModel):
-    id: str
+    song_id: str
+    guest_id: str
+    room_id: str
+
+    
 
 @app.get("/")
 def read_root():
@@ -194,7 +200,8 @@ def add_song(song_data: AddSong):
         "title": song_data.title,
         "artist": song_data.artist,
         "votes": 0,
-        "status": "pending"
+        "status": "pending",
+        "votes_by": []
     }
 
     song_list.append(song)
@@ -219,3 +226,15 @@ def get_songs(room_id: str):
             this_song_list.append(song)
     return this_song_list
         
+#votes
+@app.post("/songs/vote")
+def vote_song(vote_data: VoteSong):
+    for song in song_list:
+        if song["song_id"] == vote_data.song_id: #song exists
+            if song["room_id"] == vote_data.room_id: #song is in the same room as the guest
+                if vote_data.guest_id in song["votes_by"]:
+                    raise HTTPException(status_code=400, detail="Already voted for this song")
+                song["votes"] += 1
+                song["votes_by"].append(vote_data.guest_id)
+                return song
+    raise HTTPException(status_code=404, detail="Song not found")
