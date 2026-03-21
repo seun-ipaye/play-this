@@ -1,28 +1,36 @@
-import { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import './GuestRoom.css'
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./GuestRoom.css";
 
 function GuestRoom() {
-  const { code } = useParams()
-  const [search, setSearch] = useState('')
+  const { code } = useParams();
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const roomTitle = location.state?.roomTitle;
 
   const songs = [
-    { song_id: '1', title: 'Blinding Lights', artist: 'The Weeknd', votes: 24 },
-    { song_id: '2', title: 'As It Was', artist: 'Harry Styles', votes: 17 },
-    { song_id: '3', title: 'Unholy', artist: 'Sam Smith', votes: 11 },
-  ]
+    { song_id: "1", title: "Blinding Lights", artist: "The Weeknd", votes: 24 },
+    { song_id: "2", title: "As It Was", artist: "Harry Styles", votes: 17 },
+    { song_id: "3", title: "Unholy", artist: "Sam Smith", votes: 11 },
+  ];
 
   return (
     <div className="guestroom">
-
       <nav className="top-nav">
+        <button className="back-btn" onClick={() => navigate("/")}>
+          ← Exit
+        </button>
         <div className="logo">playthis</div>
         <div className="nav-badge">{code}</div>
       </nav>
 
       <section className="gr-hero">
         <h1>Request a song</h1>
-        <p className="gr-sub">Search for a song and vote for what you want to hear.</p>
+        <p className="gr-sub">
+          Search for a song and vote for what you want to hear.
+        </p>
       </section>
 
       <div className="search-box">
@@ -49,9 +57,8 @@ function GuestRoom() {
           </div>
         ))}
       </div>
-
     </div>
-  )
+  );
 }
 
-export default GuestRoom
+export default GuestRoom;

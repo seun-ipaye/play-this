@@ -2,6 +2,7 @@ from pydantic import BaseModel
 import string
 import random
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 room_list = [
@@ -35,7 +36,7 @@ guest_list = [
 ]
 song_list = [
     {
-        "song_id": "7R800MMK",
+        "id": "7R800MMK",
         "room_id": "YPW8UI7GXJ",
         "guest_id": "VWIMCY",
         "title": "the jesters dance",
@@ -45,6 +46,13 @@ song_list = [
     }
 ]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def generate_random_code(size, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choices(chars, k=size))
@@ -61,6 +69,9 @@ class AddSong(BaseModel):
     artist: str
     room_id: str
     guest_id: str
+
+class VoteSong(BaseModel):
+    id: str
 
 @app.get("/")
 def read_root():
@@ -136,7 +147,8 @@ def get_guests(room_id: str):
         if guest["room_id"] == room_id:
             this_guest_list.append(guest)
     return this_guest_list
-        
+     
+#songs   
 @app.post("/songs")
 def add_song(song_data: AddSong):
     room_exists = False
@@ -180,7 +192,6 @@ def add_song(song_data: AddSong):
 
     return song
         
-            
 @app.get("/rooms/{room_id}/songs")
 def get_songs(room_id: str):
     room_exists = False
