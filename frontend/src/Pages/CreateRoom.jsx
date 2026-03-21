@@ -40,7 +40,7 @@ function CreateRoom() {
 
       console.log("Created room:", room);
 
-      navigate("/dashboard", { state: { room } });
+      navigate("/dashboard", { state: { room, roomID: room.id } });
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
