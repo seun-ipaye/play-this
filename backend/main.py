@@ -6,6 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 app = FastAPI()
 room_list = [
   {
@@ -43,7 +45,7 @@ song_list = [
         "guest_id": "0JCSUZ",
         "title": "the jesters dance",
         "artist": "in flames",
-        "votes": 20,
+        "votes": 1,
         "status": "pending",
         "votes_by": []
     },
@@ -53,7 +55,7 @@ song_list = [
         "guest_id": "0JCSUZ",
         "title": "fuga",
         "artist": "mavo",
-        "votes": 12,
+        "votes": 3,
         "status": "pending",
         "votes_by": []
     }
@@ -61,7 +63,7 @@ song_list = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("FRONTEND_URL")],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -226,6 +228,7 @@ def get_songs(room_id: str):
     for song in song_list:
         if song["room_id"] == room_id:
             this_song_list.append(song)
+    this_song_list = sorted(this_song_list, key=lambda song: song["votes"], reverse=True)
     return this_song_list
         
 #votes
