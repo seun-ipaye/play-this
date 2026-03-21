@@ -38,10 +38,19 @@ song_list = [
     {
         "id": "7R800MMK",
         "room_id": "YPW8UI7GXJ",
-        "guest_id": "VWIMCY",
+        "guest_id": "0JCSUZ",
         "title": "the jesters dance",
         "artist": "in flames",
-        "votes": 0,
+        "votes": 20,
+        "status": "pending"
+    },
+    {
+        "song_id": "VQMHJE6A",
+        "room_id": "YPW8UI7GXJ",
+        "guest_id": "0JCSUZ",
+        "title": "fuga",
+        "artist": "mavo",
+        "votes": 12,
         "status": "pending"
     }
 ]

@@ -46,7 +46,15 @@ function JoinRoom() {
       );
       const roomData = await roomRes.json();
 
-      navigate(`/room/${roomCode}`, { state: { guest: data, roomCode } });
+      navigate(`/room/${roomCode}`, {
+        state: {
+          guest: data,
+          guestName: data.name,
+          roomCode,
+          roomTitle: roomData.title,
+          roomID: roomData.id,
+        },
+      });
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
