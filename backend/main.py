@@ -238,3 +238,22 @@ def vote_song(vote_data: VoteSong):
                 song["votes_by"].append(vote_data.guest_id)
                 return song
     raise HTTPException(status_code=404, detail="Song not found")
+
+@app.get("/rooms/{room_id}/guestnumber")
+def get_number_of_guests(room_id: str):
+    room_exists = False
+
+    for room in room_list:
+        if room["id"] == room_id:
+            room_exists = True
+            break
+
+    if not room_exists:
+        raise HTTPException(status_code=404, detail="Room not found")
+    
+    guestnum = 0
+    for guest in guest_list:
+        if guest["room_id"] == room_id:
+            guestnum += 1
+
+    return guestnum

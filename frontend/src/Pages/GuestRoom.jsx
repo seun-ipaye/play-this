@@ -20,33 +20,36 @@ function GuestRoom() {
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
 
-  useEffect(() => {
-    async function loadPage() {
-      try {
-        setLoading(true);
-        setError("");
+  async function loadPage() {
+    try {
+      setLoading(true);
+      setError("");
 
-        const response = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}/rooms/${roomID}/songs`,
-        );
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/rooms/${roomID}/songs`,
+      );
 
-        const data = await response.json();
+      const data = await response.json();
 
-        console.log("song list:", data);
+      console.log("song list:", data);
 
-        setSongList(data);
-      } catch (err) {
-        setError(err.message || "Something went wrong");
-      } finally {
-        setLoading(false);
-      }
+      setSongList(data);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
+  }
 
+  useEffect(() => {
     loadPage();
   }, []);
 
   async function addSong() {
     try {
+      setArtist("");
+      setTitle("");
+      // this might not be good practice^
       setLoading(true);
       setError("");
 
@@ -67,7 +70,7 @@ function GuestRoom() {
       );
 
       const data = await response.json();
-
+      await loadPage();
       console.log("song list:", data);
     } catch (err) {
       setError(err.message || "Something went wrong");
@@ -97,7 +100,7 @@ function GuestRoom() {
       );
 
       const data = await response.json();
-
+      await loadPage();
       console.log("song:", data);
     } catch (err) {
       setError(err.message || "Something went wrong");
@@ -118,7 +121,8 @@ function GuestRoom() {
 
       <section className="gr-hero">
         <h1>Hi {guestName}</h1>
-        {/* <p className="gr-sub">{roomTitle}</p> */}
+        {/* heres the name of the room theyre in kamso, probably use it somewhere in this page idk */}
+        <p className="gr-sub">{roomTitle}</p>
       </section>
 
       <section className="gr-hero">

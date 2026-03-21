@@ -8,44 +8,58 @@ function Dashboard() {
   const room = location.state?.room;
   const roomID = location.state?.roomID;
 
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState();
 
   const [songList, setSongList] = useState([]);
+  const [numberOfGuests, setNumberOfGuests] = useState();
+
+  async function loadPage() {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/rooms/${roomID}/songs`,
+      );
+
+      const data = await response.json();
+
+      console.log("song list:", data);
+
+      setSongList(data);
+      await getGuestNumber();
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function getGuestNumber() {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/rooms/${roomID}/guestnumber`,
+      );
+
+      const data = await response.json();
+
+      console.log("number of guests:", data);
+
+      setNumberOfGuests(data);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    async function loadPage() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}/rooms/${roomID}/songs`,
-        );
-
-        const data = await response.json();
-
-        console.log("song list:", data);
-
-        setSongList(data);
-      } catch (err) {
-        setError(err.message || "Something went wrong");
-      } finally {
-        setLoading(false);
-      }
-    }
-
     loadPage();
   }, []);
 
-  const nowUp = {
-    song_id: "1",
-    title: "Blinding Lights",
-    artist: "The Weeknd",
-    votes: 24,
-  };
-
-  // const queue = [
-  //   { song_id: "2", title: "As It Was", artist: "Harry Styles", votes: 17 },
-  //   { song_id: "3", title: "Unholy", artist: "Sam Smith", votes: 11 },
-  //   { song_id: "4", title: "Anti-Hero", artist: "Taylor Swift", votes: 8 },
-  // ];
+  // const nowUp = {
+  //   song_id: "1",
+  //   title: "Blinding Lights",
+  //   artist: "The Weeknd",
+  //   votes: 24,
+  // };
 
   return (
     <div className="dashboard">
@@ -59,7 +73,7 @@ function Dashboard() {
       <section className="dash-hero">
         <div className="room-code-label">Room</div>
         <div className="room-code">{room?.title}</div>
-        <p className="dash-sub">42 guests in the room</p>
+        <p className="dash-sub">{numberOfGuests} guests in the room</p>
       </section>
 
       {/* <div className="now-up">
