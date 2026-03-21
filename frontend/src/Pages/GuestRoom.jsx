@@ -13,8 +13,12 @@ function GuestRoom() {
   const roomTitle = location.state?.roomTitle;
   const roomID = location.state?.roomID;
   const guestName = location.state?.guestName;
+  const guestID = location.state?.guestID;
 
   const [songList, setSongList] = useState([]);
+
+  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState("");
 
   useEffect(() => {
     async function loadPage() {
@@ -41,6 +45,37 @@ function GuestRoom() {
     loadPage();
   }, []);
 
+  async function addSong() {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/songs`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: title,
+            artist: artist,
+            room_id: roomID,
+            guest_id: guestID,
+          }),
+        },
+      );
+
+      const data = await response.json();
+
+      console.log("song list:", data);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="guestroom">
       <nav className="top-nav">
@@ -66,11 +101,26 @@ function GuestRoom() {
       <div className="search-box">
         <input
           type="text"
-          placeholder="Search for a song or artist..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          //placeholder="Search for a song or artist..."
+          placeholder="for title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </div>
+      {/* temporary */}
+      <div className="search-box">
+        <input
+          type="text"
+          //placeholder="Search for a song or artist..."
+          placeholder="for artist"
+          value={artist}
+          onChange={(e) => setArtist(e.target.value)}
+        />
+      </div>
+
+      <button className="vote-btn" onClick={() => addSong()}>
+        CLICK ME TO REQUEST A SONG
+      </button>
 
       <div className="song-queue">
         <div className="queue-header">

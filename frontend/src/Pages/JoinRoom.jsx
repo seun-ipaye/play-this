@@ -50,6 +50,7 @@ function JoinRoom() {
         state: {
           guest: data,
           guestName: data.name,
+          guestID: data.guest_id,
           roomCode,
           roomTitle: roomData.title,
           roomID: roomData.id,
