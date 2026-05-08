@@ -54,22 +54,20 @@ function CreateRoom() {
         <button className="back-btn" onClick={() => navigate("/")}>
           ← Back
         </button>
-        <div className="logo">playthis</div>
+        <div className="logo">
+          play<span>this</span>
+        </div>
       </nav>
 
-      <section className="cr-hero">
-        <h1>Create a room</h1>
-        <p className="cr-sub">
-          Set up your event and share the code with your crowd.
-        </p>
+      <section className="jr-hero">
+        <h1>Create room</h1>
       </section>
 
-      <div className="cr-form">
+      <div className="jr-form">
         <div className="input-group">
           <label>Event name</label>
           <input
             type="text"
-            placeholder="e.g. Saturday Night"
             value={eventName}
             onChange={(e) => setEventName(e.target.value)}
           />
@@ -82,7 +80,7 @@ function CreateRoom() {
           onClick={handleCreateRoom}
           disabled={loading}
         >
-          {loading ? "Creating..." : "Create Room"}
+          {loading ? "Creating..." : "Create"}
         </button>
       </div>
     </div>
