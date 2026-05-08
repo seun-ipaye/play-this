@@ -7,7 +7,7 @@ function Landing() {
   return (
     <div className="landing">
       <nav className="landing-nav">
-        <div className="logo">
+        <div className="logolanding">
           play<span>this</span>
         </div>
       </nav>

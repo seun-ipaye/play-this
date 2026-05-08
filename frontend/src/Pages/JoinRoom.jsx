@@ -69,14 +69,13 @@ function JoinRoom() {
         <button className="back-btn" onClick={() => navigate("/")}>
           ← Back
         </button>
-        <div className="logo">playthis</div>
+        <div className="logo">
+          play<span>this</span>
+        </div>
       </nav>
 
       <section className="jr-hero">
-        <h1>Join a room</h1>
-        <p className="jr-sub">
-          Enter the room code and your nickname to get started.
-        </p>
+        <h1>Join room</h1>
       </section>
 
       <div className="jr-form">
@@ -84,17 +83,15 @@ function JoinRoom() {
           <label>Room code</label>
           <input
             type="text"
-            placeholder="e.g. XXPLTS"
             value={roomCode}
             onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
           />
         </div>
 
         <div className="input-group">
-          <label>Your nickname</label>
+          <label>Nickname</label>
           <input
             type="text"
-            placeholder="e.g. DJ Mikey"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
@@ -107,7 +104,7 @@ function JoinRoom() {
           onClick={handleJoinRoom}
           disabled={loading}
         >
-          {loading ? "Joining..." : "Join Room"}
+          {loading ? "Joining..." : "Join"}
         </button>
       </div>
     </div>
