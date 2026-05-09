@@ -16,6 +16,7 @@ function GuestRoom() {
   const guestID = location.state?.guestID;
 
   const [songList, setSongList] = useState([]);
+  const [songResults, setSongResults] = useState([]);
 
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
@@ -44,6 +45,40 @@ function GuestRoom() {
   useEffect(() => {
     loadPage();
   }, []);
+
+  // YourComponent.jsx
+  useEffect(() => {
+    if (!title.trim()) {
+      setSongResults([]);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      searchSongs(title);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [title]);
+
+  async function searchSongs(songName) {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/songs/search?song=${encodeURIComponent(songName)}`,
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Failed to search songs");
+      }
+
+      setSongResults(data);
+      console.log("Song results:", data);
+    } catch (err) {
+      console.error(err);
+      setSongResults([]);
+    }
+  }
 
   async function addSong() {
     try {
@@ -136,19 +171,9 @@ function GuestRoom() {
         <input
           type="text"
           // placeholder="Search for a song or artist..."
-          placeholder="for title"
+          //placeholder="for title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      {/* temporary */}
-      <div className="search-box">
-        <input
-          type="text"
-          //placeholder="Search for a song or artist..."
-          placeholder="for artist"
-          value={artist}
-          onChange={(e) => setArtist(e.target.value)}
         />
       </div>
 

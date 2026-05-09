@@ -5,6 +5,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
+import requests
 
 load_dotenv()
 
@@ -262,3 +263,58 @@ def get_number_of_guests(room_id: str):
             guestnum += 1
 
     return guestnum
+
+#search
+SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
+SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
+
+def get_spotify_token():
+    response = requests.post(
+        "https://accounts.spotify.com/api/token",
+        data={"grant_type": "client_credentials"},
+        auth=(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET),
+    )
+
+    if not response.ok:
+        raise HTTPException(status_code=500, detail="Could not get Spotify token")
+
+    return response.json()["access_token"]
+
+
+@app.get("/songs/search")
+def search_songs(song: str):
+    token = get_spotify_token()
+
+    response = requests.get(
+        "https://api.spotify.com/v1/search",
+        headers={
+            "Authorization": f"Bearer {token}",
+        },
+        params={
+            "q": song,
+            "type": "track",
+            "limit": 3,
+        },
+    )
+
+    if not response.ok:
+        raise HTTPException(status_code=500, detail="Spotify search failed")
+
+    data = response.json()
+
+    songs = []
+
+    for item in data["tracks"]["items"]:
+        songs.append(
+            {
+                "name": item["name"],
+                "artist": item["artists"][0]["name"],
+                "spotify_id": item["id"],
+                "album": item["album"]["name"],
+                "image": item["album"]["images"][0]["url"]
+                if item["album"]["images"]
+                else None,
+            }
+        )
+
+    return songs
