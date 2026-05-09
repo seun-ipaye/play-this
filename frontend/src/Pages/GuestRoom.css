@@ -80,3 +80,37 @@
   border-color: var(--accent);
   color: var(--accent);
 }
+
+.search-box {
+  width: 100%;
+  position: relative;
+}
+
+.song-results {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.song-result {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #242430;
+  background: #181820;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+.song-result-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.song-result-artist {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #8b879e;
+}

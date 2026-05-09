@@ -143,6 +143,13 @@ function GuestRoom() {
       setLoading(false);
     }
   }
+  // GuestRoom.jsx
+
+  function selectSong(song) {
+    setTitle(song.name);
+    setArtist(song.artist);
+    setSongResults([]);
+  }
 
   return (
     <div className="guestroom">
@@ -154,33 +161,44 @@ function GuestRoom() {
           play<span>this</span>
         </div>
       </nav>
-
       <section className="gr-hero">
         <h2>Hi {guestName},</h2>
         <h2>You're in '{roomTitle}'</h2>
       </section>
-
       <section className="gr-hero">
         <h1>Request a song</h1>
         {/* <p className="gr-sub">
           Search for a song and vote for what you want to hear.
         </p> */}
       </section>
-
       <div className="search-box">
         <input
           type="text"
-          // placeholder="Search for a song or artist..."
-          //placeholder="for title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            setArtist("");
+          }}
         />
-      </div>
 
+        {songResults.length > 0 && (
+          <div className="song-results">
+            {songResults.map((song) => (
+              <button
+                className="song-result"
+                key={song.spotify_id}
+                onClick={() => selectSong(song)}
+              >
+                <div className="song-result-title">{song.name}</div>
+                <div className="song-result-artist">{song.artist}</div>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <button className="vote-btn" onClick={() => addSong()}>
         Request
       </button>
-
       <div className="song-queue">
         <div className="queue-header">
           <h1>Current requests</h1>
