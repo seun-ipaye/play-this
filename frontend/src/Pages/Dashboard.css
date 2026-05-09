@@ -24,10 +24,8 @@
 }
 
 .room-code {
-  font-family: 'Syne', sans-serif;
   font-size: 42px;
   font-weight: 800;
-  color: var(--accent);
   letter-spacing: 4px;
 }
 
@@ -57,7 +55,7 @@
 }
 
 .timer {
-  font-family: 'Syne', sans-serif;
+  font-family: "Syne", sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--muted);
@@ -68,8 +66,12 @@
 }
 
 .now-up-card {
-  background: linear-gradient(135deg, rgba(124,92,252,0.15), rgba(196,92,252,0.08));
-  border: 1px solid rgba(124,92,252,0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(124, 92, 252, 0.15),
+    rgba(196, 92, 252, 0.08)
+  );
+  border: 1px solid rgba(124, 92, 252, 0.3);
   border-radius: var(--radius);
   padding: 20px;
   display: flex;
@@ -79,7 +81,7 @@
 }
 
 .now-up-title {
-  font-family: 'Syne', sans-serif;
+  font-family: "Syne", sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: var(--text);
@@ -100,19 +102,15 @@
 }
 
 .reject-btn {
-  background: rgba(248,113,113,0.1);
+  background: rgba(248, 113, 113, 0.1);
   color: #f87171;
-  border: 1px solid rgba(248,113,113,0.2);
+  border: 1px solid rgba(248, 113, 113, 0.2);
   padding: 10px 16px;
   border-radius: 10px;
   font-size: 13px;
   font-weight: 500;
   flex-shrink: 0;
   transition: all 0.2s;
-}
-
-.reject-btn:hover {
-  background: rgba(248,113,113,0.2);
 }
 
 .song-queue {
@@ -141,12 +139,8 @@
   transition: border-color 0.2s;
 }
 
-.song-row:hover {
-  border-color: rgba(124,92,252,0.3);
-}
-
 .song-rank {
-  font-family: 'Syne', sans-serif;
+  font-family: "Syne", sans-serif;
   font-size: 13px;
   font-weight: 800;
   color: var(--muted);
@@ -194,11 +188,7 @@
 }
 
 .action-btn.remove {
-  background: rgba(248,113,113,0.1);
+  background: rgba(248, 113, 113, 0.1);
   color: #f87171;
-  border: 1px solid rgba(248,113,113,0.2);
-}
-
-.action-btn.remove:hover {
-  background: rgba(248,113,113,0.2);
+  border: 1px solid rgba(248, 113, 113, 0.2);
 }

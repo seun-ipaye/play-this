@@ -60,19 +60,9 @@
     background 0.18s ease;
 }
 
-.card-btn:hover {
-  transform: translateY(-2px);
-  border-color: rgba(122, 92, 255, 0.5);
-  background: #20202a;
-}
-
 .card-btn.primary {
   background: #7a5cff;
   border-color: transparent;
-}
-
-.card-btn.primary:hover {
-  box-shadow: 0 10px 34px rgba(122, 92, 255, 0.3);
 }
 
 .card-title {

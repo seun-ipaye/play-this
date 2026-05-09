@@ -112,24 +112,24 @@ function GuestRoom() {
   return (
     <div className="guestroom">
       <nav className="top-nav">
-        <button className="back-btn" onClick={() => navigate("/")}>
-          ← Exit
+        <button className="back-btn" onClick={() => navigate("/join")}>
+          ← Back
         </button>
-        <div className="logo">playthis</div>
-        <div className="nav-badge">{code}</div>
+        <div className="logo">
+          play<span>this</span>
+        </div>
       </nav>
 
       <section className="gr-hero">
-        <h1>Hi {guestName}</h1>
-        {/* heres the name of the room theyre in kamso, probably use it somewhere in this page idk */}
-        <p className="gr-sub">{roomTitle}</p>
+        <h2>Hi {guestName},</h2>
+        <h2>You're in '{roomTitle}'</h2>
       </section>
 
       <section className="gr-hero">
         <h1>Request a song</h1>
-        <p className="gr-sub">
+        {/* <p className="gr-sub">
           Search for a song and vote for what you want to hear.
-        </p>
+        </p> */}
       </section>
 
       <div className="search-box">
@@ -158,7 +158,7 @@ function GuestRoom() {
 
       <div className="song-queue">
         <div className="queue-header">
-          <h2>Current requests</h2>
+          <h1>Current requests</h1>
         </div>
 
         {songList.map((song) => (

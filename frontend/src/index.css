@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap");
 
 * {
   margin: 0;
@@ -14,26 +14,28 @@
   --accent2: #c45cfc;
   --text: #f0eeff;
   --muted: #7a7a9a;
-  --border: rgba(255,255,255,0.07);
+  --border: rgba(255, 255, 255, 0.07);
   --radius: 16px;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   min-height: 100vh;
 }
 
-h1, h2, h3 {
-  font-family: 'Syne', sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Syne", sans-serif;
 }
 
 button {
   cursor: pointer;
   border: none;
   background: none;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .top-nav {
@@ -52,12 +54,8 @@ button {
   transition: color 0.2s;
 }
 
-.back-btn:hover {
-  color: var(--text);
-}
-
 .logo {
-  font-family: 'Syne', sans-serif;
+  font-family: "Syne", sans-serif;
   font-weight: 800;
   font-size: 22px;
   color: var(--accent);
@@ -84,7 +82,7 @@ button {
   padding: 16px 18px;
   font-size: 16px;
   color: var(--text);
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   transition: border-color 0.2s;
   width: 100%;
 }

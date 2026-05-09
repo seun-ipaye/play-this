@@ -33,7 +33,7 @@
   padding: 16px 18px;
   font-size: 16px;
   color: var(--text);
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   transition: border-color 0.2s;
   width: 100%;
 }
@@ -75,13 +75,8 @@
   transition: all 0.2s;
 }
 
-.vote-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 .vote-btn.voted {
-  background: rgba(124,92,252,0.15);
+  background: rgba(124, 92, 252, 0.15);
   border-color: var(--accent);
   color: var(--accent);
 }
