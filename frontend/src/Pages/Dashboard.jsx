@@ -93,7 +93,9 @@ function Dashboard() {
           <>
             <p className="dash-sub">Room code: {roomCode}</p>
 
-            <button onClick={() => setShowQRCode(true)}>Show QR code</button>
+            <button className="show-qr-btn" onClick={() => setShowQRCode(true)}>
+              Show QR code
+            </button>
           </>
         )}
 
@@ -122,23 +124,27 @@ function Dashboard() {
       </div>
 
       {showQRCode && (
-        <div onClick={() => setShowQRCode(false)}>
-          <div onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setShowQRCode(false)}>Close</button>
+        <div className="qr-overlay" onClick={() => setShowQRCode(false)}>
+          <div className="qr-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="qr-close-btn"
+              onClick={() => setShowQRCode(false)}
+            >
+              ×
+            </button>
 
             <h2>Scan to join</h2>
 
-            <QRCodeCanvas
-              value={joinUrl}
-              size={220}
-              bgColor="#ffffff"
-              fgColor="#000000"
-              level="H"
-              includeMargin
-            />
-
-            <p>{roomCode}</p>
-            <p>{joinUrl}</p>
+            <div className="qr-code-box">
+              <QRCodeCanvas
+                value={joinUrl}
+                size={220}
+                bgColor="#ffffff"
+                fgColor="#000000"
+                level="H"
+                includeMargin
+              />
+            </div>
           </div>
         </div>
       )}

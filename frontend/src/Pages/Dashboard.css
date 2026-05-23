@@ -192,3 +192,72 @@
   color: #f87171;
   border: 1px solid rgba(248, 113, 113, 0.2);
 }
+
+.show-qr-btn {
+  margin-top: 12px;
+  margin-bottom: 14px;
+  background: #7c5cff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.show-qr-btn:hover {
+  opacity: 0.9;
+}
+
+.qr-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+}
+
+.qr-modal {
+  position: relative;
+  background: #11111a;
+  border: 1px solid #272738;
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+}
+
+.qr-modal h2 {
+  margin-bottom: 18px;
+  font-size: 22px;
+  color: white;
+}
+
+.qr-code-box {
+  display: flex;
+  justify-content: center;
+  background: white;
+  padding: 12px;
+  border-radius: 14px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.qr-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.qr-close-btn:hover {
+  color: white;
+}
