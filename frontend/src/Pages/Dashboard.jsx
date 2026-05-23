@@ -85,43 +85,68 @@ function Dashboard() {
         </div>
       </nav>
 
-      <section className="dash-hero">
-        <div className="room-code-label">Room</div>
-        <h1 className="room-code">{room?.title}</h1>
+      <main className="dashboard-content">
+        <section className="dash-hero dashboard-room-panel">
+          <div className="room-code-label">Room</div>
+          <h1 className="room-code">{room?.title}</h1>
 
-        {roomCode && (
-          <>
-            <p className="dash-sub">Room code: {roomCode}</p>
+          {roomCode && (
+            <div className="room-details-card">
+              <div>
+                <p className="detail-label">Room code</p>
+                <p className="detail-value">{roomCode}</p>
+              </div>
 
+              <div>
+                <p className="detail-label">Guests</p>
+                <p className="detail-value">{numberOfGuests}</p>
+              </div>
+            </div>
+          )}
+
+          {roomCode && (
             <button className="show-qr-btn" onClick={() => setShowQRCode(true)}>
               Show QR code
             </button>
-          </>
-        )}
+          )}
 
-        <p className="dash-sub">{numberOfGuests} guests in the room</p>
+          <p className="dash-sub">{numberOfGuests} guests in the room</p>
 
-        {error && <p style={{ color: "tomato" }}>{error}</p>}
-      </section>
+          {error && <p style={{ color: "tomato" }}>{error}</p>}
+        </section>
 
-      <div className="song-queue">
-        <div className="queue-header">
-          <h2>Up next</h2>
-        </div>
-
-        {songList.map((song, index) => (
-          <div className="song-row" key={song.song_id}>
-            <div className="song-rank">#{index + 1}</div>
-            <div className="song-info">
-              <div className="song-title">{song.title}</div>
-              <div className="song-artist">{song.artist}</div>
+        <section className="song-queue dashboard-queue-panel">
+          <div className="queue-header">
+            <div>
+              <h2>Up next</h2>
             </div>
 
-            <div className="song-votes">▲ {song.votes}</div>
-            <button className="action-btn remove">✕</button>
+            <div className="queue-count">{songList.length} songs</div>
           </div>
-        ))}
-      </div>
+
+          {loading && <p className="dash-sub">Loading queue...</p>}
+
+          {!loading && songList.length === 0 && (
+            <div>
+              <p>No songs yet.</p>
+            </div>
+          )}
+
+          {songList.map((song, index) => (
+            <div className="song-row" key={song.song_id}>
+              <div className="song-rank">#{index + 1}</div>
+
+              <div className="song-info">
+                <div className="song-title">{song.title}</div>
+                <div className="song-artist">{song.artist}</div>
+              </div>
+
+              <div className="song-votes">▲ {song.votes}</div>
+              <button className="action-btn remove">✕</button>
+            </div>
+          ))}
+        </section>
+      </main>
 
       {showQRCode && (
         <div className="qr-overlay" onClick={() => setShowQRCode(false)}>

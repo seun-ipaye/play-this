@@ -1,3 +1,5 @@
+/* src/pages/Dashboard.css */
+
 .dashboard {
   min-height: 100vh;
   display: flex;
@@ -5,6 +7,12 @@
   padding: 0 24px;
   max-width: 480px;
   margin: 0 auto;
+  gap: 24px;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
@@ -34,83 +42,33 @@
   color: var(--muted);
 }
 
-.now-up {
-  display: flex;
-  flex-direction: column;
+.room-details-card {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-.now-up-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.now-up-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--accent);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.timer {
-  font-family: "Syne", sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  background: var(--surface2);
+.room-details-card > div {
+  background: var(--surface);
   border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 20px;
+  border-radius: 14px;
+  padding: 12px;
 }
 
-.now-up-card {
-  background: linear-gradient(
-    135deg,
-    rgba(124, 92, 252, 0.15),
-    rgba(196, 92, 252, 0.08)
-  );
-  border: 1px solid rgba(124, 92, 252, 0.3);
-  border-radius: var(--radius);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+.detail-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
 }
 
-.now-up-title {
+.detail-value {
   font-family: "Syne", sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--text);
-  letter-spacing: -0.5px;
-}
-
-.now-up-artist {
-  font-size: 14px;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-.now-up-votes {
-  font-size: 13px;
-  color: var(--accent);
-  margin-top: 8px;
-  font-weight: 500;
-}
-
-.reject-btn {
-  background: rgba(248, 113, 113, 0.1);
-  color: #f87171;
-  border: 1px solid rgba(248, 113, 113, 0.2);
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 500;
-  flex-shrink: 0;
-  transition: all 0.2s;
 }
 
 .song-queue {
@@ -120,12 +78,46 @@
   padding-bottom: 40px;
 }
 
+.queue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
 .queue-header h2 {
   font-size: 16px;
   font-weight: 700;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.queue-subtitle {
+  display: none;
+}
+
+.queue-count {
+  display: none;
+}
+
+.empty-queue {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.empty-queue p {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.empty-queue span {
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .song-row {
@@ -195,7 +187,7 @@
 
 .show-qr-btn {
   margin-top: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   background: #7c5cff;
   color: white;
   border: none;
@@ -203,6 +195,7 @@
   padding: 10px 16px;
   font-weight: 700;
   cursor: pointer;
+  width: fit-content;
 }
 
 .show-qr-btn:hover {
@@ -260,4 +253,114 @@
 
 .qr-close-btn:hover {
   color: white;
+}
+
+/* Desktop host/DJ dashboard */
+@media (min-width: 900px) {
+  .dashboard {
+    max-width: 1120px;
+    padding: 0 40px;
+    gap: 36px;
+  }
+
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .dashboard-room-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 28px;
+    position: sticky;
+    top: 32px;
+  }
+
+  .room-code {
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+
+  .room-details-card {
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+  }
+
+  .room-details-card > div {
+    background: var(--surface2);
+  }
+
+  .show-qr-btn {
+    width: 100%;
+    padding: 13px 16px;
+    margin-top: 16px;
+  }
+
+  .dashboard-queue-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 28px;
+    min-height: 520px;
+  }
+
+  .queue-header {
+    margin-bottom: 10px;
+  }
+
+  .queue-header h2 {
+    font-size: 22px;
+    color: var(--text);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .queue-subtitle {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .queue-count {
+    display: block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .song-row {
+    background: var(--surface2);
+    padding: 16px 18px;
+  }
+
+  .song-row:hover {
+    border-color: rgba(124, 92, 252, 0.45);
+  }
+
+  .song-title {
+    font-size: 15px;
+  }
+
+  .song-artist {
+    font-size: 13px;
+  }
+
+  .song-votes {
+    font-size: 14px;
+  }
+
+  .qr-modal {
+    max-width: 360px;
+    padding: 32px 28px 28px;
+  }
 }
