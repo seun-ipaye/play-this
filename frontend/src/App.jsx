@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Landing from './Pages/Landing'
-import CreateRoom from './Pages/CreateRoom'
-import JoinRoom from './Pages/JoinRoom'
-import Dashboard from './Pages/Dashboard'
-import GuestRoom from './Pages/GuestRoom'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Landing from "./Pages/Landing";
+import CreateRoom from "./Pages/CreateRoom";
+import JoinRoom from "./Pages/JoinRoom";
+import Dashboard from "./Pages/Dashboard";
+import GuestRoom from "./Pages/GuestRoom";
 
 function App() {
   return (
@@ -14,9 +14,10 @@ function App() {
         <Route path="/join" element={<JoinRoom />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/room/:code" element={<GuestRoom />} />
+        <Route path="/join/:roomCodeFromUrl" element={<JoinRoom />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
